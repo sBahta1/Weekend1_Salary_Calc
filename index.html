@@ -14,27 +14,35 @@
 
 <body>
     <h1>Polaris Annual Budget</h1>
-<div class='container-flex'>
-<input type="text" placeholder="First Name">
-<input type="text" placeholder="Last Name">
-<input type="text" placeholder="ID">
-<input type="text" placeholder="Title">
-<input type="text" placeholder="Annual Salary">
-</div>
-<div>
-    <table class="table tabble-hover" id= "empTable">
-        <thead id="tableHead">
-            <tr>
-                <th>FirstName</th>
-                <th>Last Name</th>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Annual Salary</th>
-            </tr>
-        </thead>
-        
-    </table>
-</div>
+    <div class='container-flex'>
+        <input type="text" placeholder="First Name" id="firstNameInput">
+        <input type="text" placeholder="Last Name" id="lastNameInput">
+        <input type="text" placeholder="ID Number" id="idInput">
+        <input type="text" placeholder="Title" id="titleInput">
+        <input type="text" placeholder="Annual Salary" id="annulSalInput">
+    </div>
+    <div>
+        <table id="empTable" class="table table-hover">
+            <thead id="tableHead">
+                <tr>
+                    <th>FirstName</th>
+                    <th>Last Name</th>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Annual Salary</th>
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+    <div class="row">
+        <div id="theButtons" class="col-md-7">
+            <button id=subberBtn class="btn btn-success"> Submit</button>
+            <button id=dltBtn class="btn btn-danger">Delete</button>
+        </div>
+        <div class="col-md-5" id="monthlyTotal">Monthly Salary Expenditures: $</div>
+    </div>
+    </div>
 </body>
 
 </html>
