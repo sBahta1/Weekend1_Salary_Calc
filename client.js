@@ -9,13 +9,12 @@ class employee {
     }
 }
 
-const empOne = new employee('Sam', 'Bahta', '001', 'CEO', 150000);
-const empTwo = new employee('Amalia', 'Ellison', '002', 'Legal Counsel', 60000);
-const empThree = new employee('Dwight', 'Schrute', 729, 'Assnt. to the Rgnl. Mngr.', 30000);
-const empFour = new employee('Chandler', 'Bing', 928, 'WENIS Mgmt.', 35000);
-const empFive = new employee('Elon', 'Musk', 302, 'Coffee Boy', 15000);
+const empOne = new employee('Sam', 'Bahta', '001', 'CEO', 70000);
+const empTwo = new employee('Dwight', 'Schrute', 729, 'Assnt. to the Rgnl. Mngr.', 30000);
+const empThree = new employee('Chandler', 'Bing', 928, 'WENUS Mngr.', 35000);
+const empFour = new employee('Elon', 'Musk', 302, 'Coffee Boy', 15000);
 
-let employeeArr = [empOne, empTwo, empThree, empFour, empFive];
+let employeeArr = [empOne, empTwo, empThree, empFour];
 
 
 $(readyNow);
@@ -38,7 +37,7 @@ function submitFunc() {
     let newTitle = $('#titleInput').val();
     let newAnSal = $('#annulSalInput').val();
     employeeArr.push(new employee(newFirst, newLast, newId, newTitle, newAnSal));
-    $('#calcBody').append('<tr>' + '<td>' + newFirst + '</td>' + '<td>' + newLast + '</td>' + '<td>' + newId + '</td>' + '<td>' + newTitle + '</td>' + '<td>' + newAnSal + '</td>' + '<td class="bg-danger text-white">' + '<button class="btn btn-danger btn-block delete-btn">Delete</button>' + '</td>' + '</tr>');
+    $('#calcBody').append('<tr>' + '<td>' + newFirst + '</td>' + '<td>' + newLast + '</td>' + '<td>' + newId + '</td>' + '<td>' + newTitle + '</td>' + '<td>' + newAnSal + '</td>' + '<td class="bg-danger text-white">' + '<button       class="btn btn-danger btn-block delete-btn">Delete</button>' + '</td>' + '</tr>');
     console.log(employeeArr);
     $('#firstNameInput').val('');
     $('#lastNameInput').val('');
@@ -48,21 +47,20 @@ function submitFunc() {
     expenceFunc()
 }
 function expenceFunc() {
-     
     let monthlyWages = 0;
     for (worker of employeeArr) {
         monthlyWages += Number(worker.annualSalary);
     }
-    monthlyWages/=12;
-    $('#monthlyTotal').text(Math.round(Number(monthlyWages)));
+    monthlyWages /= 12;
+    if (monthlyWages > 20000) {
+        $("#monthlyTotal").css("color", "red");
+    }
+    $('#monthlyTotal').text(Math.round(Number(monthlyWages)).toLocaleString('en-US', { style: 'currency', currency: 'USD' }));
     console.log(monthlyWages);
 }
 
 function removeFunc() {
-    console.log('delete clicked',this.indexOf);
+    console.log('delete clicked');
     $(this).parent().parent().remove();
-  
-    
-
 }
 

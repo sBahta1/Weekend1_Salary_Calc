@@ -1,7 +1,12 @@
 h1{
     text-align: center;
+    background-color: cadetblue
 }
-
+body{
+    max-width: 900px;
+  margin: 0 auto;
+  height: 600px;
+}
 input{
     border: 0;
     margin: 10px;
@@ -10,6 +15,7 @@ input{
 #empTable{
     border:1px solid;
     border-color: rgb(221,221,221);
+    
 }
 th {
     background-color: cornflowerblue;
