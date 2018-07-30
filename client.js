@@ -25,9 +25,9 @@ function readyNow() {
     $('#calcBody').on('click', '.delete-btn', removeFunc);
     $('#subberBtn').on('click', submitFunc);
     for (employ of employeeArr) {
-        $('#calcBody').append('<tr>' + '<td>' + employ.firstName + '</td>' + '<td>' + employ.lastName + '</td>' + '<td>' + employ.id + '</td>' + '<td>' + employ.title + '</td>' + '<td>' + employ.annualSalary + '</td>' + '<td class="bg-danger text-white">' + '<button id="deletebtn" class="btn btn-danger btn-block delete-btn">Delete</button>' + '</td>' + '</tr>');
+        $('#calcBody').append('<tr>' + '<td>' + employ.firstName + '</td>' + '<td>' + employ.lastName + '</td>' + '<td class="arrFindr">' + employ.id + '</td>' + '<td>' + employ.title + '</td>' + '<td class="salary">' + employ.annualSalary + '</td>' + '<td class="bg-danger text-white">' + '<button id="deletebtn" class="btn btn-danger btn-block delete-btn">Delete</button>' + '</td>' + '</tr>');
     }
-    $('#monthlyTotal').append(0)
+
     expenceFunc();
 }
 function submitFunc() {
@@ -37,7 +37,7 @@ function submitFunc() {
     let newTitle = $('#titleInput').val();
     let newAnSal = $('#annulSalInput').val();
     employeeArr.push(new employee(newFirst, newLast, newId, newTitle, newAnSal));
-    $('#calcBody').append('<tr>' + '<td>' + newFirst + '</td>' + '<td>' + newLast + '</td>' + '<td>' + newId + '</td>' + '<td>' + newTitle + '</td>' + '<td>' + newAnSal + '</td>' + '<td class="bg-danger text-white">' + '<button       class="btn btn-danger btn-block delete-btn">Delete</button>' + '</td>' + '</tr>');
+    $('#calcBody').append('<tr>' + '<td>' + newFirst + '</td>' + '<td>' + newLast + '</td>' + '<td class="arrFindr">' + newId + '</td>' + '<td>' + newTitle + '</td>' + '<td class="salary">' + newAnSal + '</td>' + '<td class="bg-danger text-white">' + '<button class="btn btn-danger btn-block delete-btn">Delete</button>' + '</td>' + '</tr>');
     console.log(employeeArr);
     $('#firstNameInput').val('');
     $('#lastNameInput').val('');
@@ -46,8 +46,8 @@ function submitFunc() {
     $('#annulSalInput').val('');
     expenceFunc()
 }
+let monthlyWages = 0;
 function expenceFunc() {
-    let monthlyWages = 0;
     for (worker of employeeArr) {
         monthlyWages += Number(worker.annualSalary);
     }
@@ -55,12 +55,34 @@ function expenceFunc() {
     if (monthlyWages > 20000) {
         $("#monthlyTotal").css("color", "red");
     }
+    updateMonthlyWages();
+} 
+  
+function updateMonthlyWages() {
     $('#monthlyTotal').text(Math.round(Number(monthlyWages)).toLocaleString('en-US', { style: 'currency', currency: 'USD' }));
     console.log(monthlyWages);
 }
 
+
 function removeFunc() {
     console.log('delete clicked');
-    $(this).parent().parent().remove();
+  
+    let salary = $(this).parent().parent().find('.salary').text();
+   monthlyWages -= (salary/12); 
+   //attempt to search array for employee by ID number and splice out employee 
+   let idFound = $(this).parent().parent().find('.arrFindr').text();
+   for (peeps of employeeArr){
+       if (peeps.id == idFound) {
+           // found!
+           console.log(idFound,employeeArr.indexOf(peeps));
+           let indexFound=employeeArr.indexOf(peeps);
+           employeeArr.splice (indexFound,indexFound+1);
+            console.log(employeeArr);
+        }
+         }
+         //console.log(idFound);
+         
+    updateMonthlyWages();
+   $(this).parent().parent().remove();
 }
 
