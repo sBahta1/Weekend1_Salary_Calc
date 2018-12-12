@@ -56,8 +56,8 @@ function expenceFunc() {
         $("#monthlyTotal").css("color", "red");
     }
     updateMonthlyWages();
-} 
-  
+}
+
 function updateMonthlyWages() {
     $('#monthlyTotal').text(Math.round(Number(monthlyWages)).toLocaleString('en-US', { style: 'currency', currency: 'USD' }));
     console.log(monthlyWages);
@@ -66,23 +66,23 @@ function updateMonthlyWages() {
 
 function removeFunc() {
     console.log('delete clicked');
-  
+
     let salary = $(this).parent().parent().find('.salary').text();
-   monthlyWages -= (salary/12); 
-   //attempt to search array for employee by ID number and splice out employee 
-   let idFound = $(this).parent().parent().find('.arrFindr').text();
-   for (peeps of employeeArr){
-       if (peeps.id == idFound) {
-           // found!
-           console.log(idFound,employeeArr.indexOf(peeps));
-           let indexFound=employeeArr.indexOf(peeps);
-           employeeArr.splice (indexFound,indexFound+1);
+    monthlyWages -= (salary / 12);
+    //attempt to search array for employee by ID number and splice out employee 
+    let idFound = $(this).parent().parent().find('.arrFindr').text();
+    for (peeps of employeeArr) {
+        if (peeps.id == idFound) {
+            // found!
+            console.log(idFound, employeeArr.indexOf(peeps));
+            let indexFound = employeeArr.indexOf(peeps);
+            employeeArr.splice(indexFound, indexFound + 1);
             console.log(employeeArr);
         }
-         }
-         //console.log(idFound);
-         
+    }
+
+
     updateMonthlyWages();
-   $(this).parent().parent().remove();
+    $(this).parent().parent().remove();
 }
 
